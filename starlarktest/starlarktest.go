@@ -148,5 +148,4 @@ var DataFile = func(pkgdir, filename string) string {
 		return filepath.Join(repoPath, pkgdir, filename)
 	}
 	return filepath.Join(build.Default.GOROOT, "src/go.starlark.net", pkgdir, filename)
-	return p
 }
