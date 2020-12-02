@@ -33,10 +33,10 @@ jobs:
     
     - name: goenv
       run: go env
-      
+
     - name: Install dependencies
       run: go mod download
 
     ## runs go test ./...
     - name: Test
-      run: go test -mod=readonly ./...
+      run: GOPATH=/home/runner/work go test -mod=readonly ./...
