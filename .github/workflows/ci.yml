@@ -36,4 +36,4 @@ jobs:
 
     ## runs go test ./...
     - name: Test
-      run: go test -mod=readonly ./... -count=1
+      run: cd /home/runner/go/src/go.starlark.net && go test -mod=readonly ./... -count=1
