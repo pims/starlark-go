@@ -7,8 +7,6 @@ name: Test Across Matrix
 
 jobs:
   test:
-    env:
-      GOPATH: ${{ github.workspace }}
     ## We want to define a strategy for our job
     strategy:
       ## this will contain a matrix of all of the combinations
@@ -33,6 +31,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
+    - name: goenv
+      run: go env
+      
     - name: Install dependencies
       run: go mod download
 
