@@ -143,5 +143,9 @@ var DataFile = func(pkgdir, filename string) string {
 		return filepath.Join(testSrcdir, "net_starlark_go", pkgdir, filename)
 	}
 
-	return filepath.Join(build.Default.GOPATH, "src/go.starlark.net", pkgdir, filename)
+	repoPath := os.Getenv("REPO_PATH")
+	if repoPath != "" {
+		return filepath.Join(repoPath, pkgdir, filename)
+	}
+	return filepath.Join(build.Default.GOROOT, "src/go.starlark.net", pkgdir, filename)
 }
