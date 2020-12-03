@@ -7,8 +7,8 @@ name: Test Across Matrix
 
 jobs:
   test:
-    env:
-      REPO_PATH: ${{ github.workspace }}
+    # env:
+    #   REPO_PATH: ${{ github.workspace }}
     ## We want to define a strategy for our job
     strategy:
       ## this will contain a matrix of all of the combinations
@@ -28,14 +28,25 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
-
+    
+    - name: Debug
+      run: |
+        pwd
+        echo ${GOPATH}
+        echo ${GOROOT}
     ## checks out our code locally so we can work with the files
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+          path: go/src/go.starlark.net
     
     - name: Install dependencies
       run: go mod download
 
     ## runs go test ./...
     - name: Test
-      run: go test -mod=readonly ./...
+      run: |
+        echo $(pwd)
+        echo ${GOPATH}
+        echo ${GOROOT}
+        go test -race -vet all -mod readonly ./...
